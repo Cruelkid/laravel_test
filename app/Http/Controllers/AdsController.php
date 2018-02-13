@@ -6,6 +6,7 @@ use App\Ad;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdsController extends Controller
 {
@@ -16,7 +17,8 @@ class AdsController extends Controller
      */
     public function index()
     {
-        $ads = Ad::all();
+//        $ads = Ad::all();
+        $ads = DB::table('ads')->paginate(5);
 
         return view('ads.index', [
             'ads' => $ads
@@ -46,6 +48,7 @@ class AdsController extends Controller
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
                 'author_name' => $request->user()->username,
+                'user_id' => $request->user()->id,
                 'created_at' => new Expression('NOW')
             ]);
         }

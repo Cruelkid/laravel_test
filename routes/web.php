@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'AdsController@index')->name('home');
 
 Route::resource('ads', 'AdsController');
 Route::resource('users', 'UsersController');

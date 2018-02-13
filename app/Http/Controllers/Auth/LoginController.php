@@ -20,11 +20,13 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
+//TODO
+//    use RegistersUsers, AuthenticatesUsers {
+//        AuthenticatesUsers::redirectPath insteadof RegistersUsers;
+//        AuthenticatesUsers::guard insteadof RegistersUsers;
+//    }
 
-    use RegistersUsers, AuthenticatesUsers {
-        AuthenticatesUsers::redirectPath insteadof RegistersUsers;
-        AuthenticatesUsers::guard insteadof RegistersUsers;
-    }
+    use AuthenticatesUsers;
 
 
     /**
@@ -42,34 +44,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'username' => $data['username'],
-            'password' => bcrypt($data['password']),
-        ]);
     }
 
 }

@@ -3,7 +3,13 @@
 @section('content')
 
     <div class="col-md-6 col-lg-6 mx-auto">
-        <a class="btn btn-primary" href="ads/create">Create an ad</a>
+
+        @if (Route::has('login'))
+            @auth
+                <a class="btn btn-primary" href="ads/create">Create an ad</a>
+            @endauth
+        @endif
+
         <div class="card">
             <div class="card-header">
                 All ads:
@@ -14,6 +20,7 @@
                     <li class="list-group-item">by {{ $ad->author_name }}</li>
                 </ul>
             @endforeach
+            {{ $ads->links() }}
         </div>
     </div>
 
