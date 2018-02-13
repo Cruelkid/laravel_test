@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('ads', 'AdsController');
 Route::resource('users', 'UsersController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

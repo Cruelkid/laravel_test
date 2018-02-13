@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdsController extends Controller
 {
@@ -28,7 +30,7 @@ class AdsController extends Controller
      */
     public function create()
     {
-        //
+        return view('ads.create');
     }
 
     /**
@@ -39,7 +41,23 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::check()) {
+            $ad = Ad::create([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'author_name' => $request->user()->username,
+                'created_at' => new Expression('NOW')
+            ]);
+        }
+
+        if ($ad) {
+            return redirect()->route('ads.show', [
+                'ad' => $ad->id
+            ])->with('success', 'Ad created successfully!');
+        }
+
+        return back()->withInput()->with('error', 'Error creating new ad');
+
     }
 
     /**
@@ -50,7 +68,11 @@ class AdsController extends Controller
      */
     public function show(Ad $ad)
     {
-        //
+        $ad = Ad::find($ad->id);
+
+        return view('ads.show', [
+            'ad' => $ad
+        ]);
     }
 
     /**
