@@ -20,8 +20,8 @@
                     <li class="list-group-item">
                         <a href="{{ $ad->id }}">{{ $ad->title }}</a>
                         <div class="float-right">
-                            <a href="{{ $ad->id }}/edit" class="d-block">Edit</a>
                             @auth
+                            <a href="{{ $ad->id }}/edit" class="d-block">Edit</a>
                             @if (Auth::user()->id == $ad->user_id)
                                 <a href="#" class="d-block"
                                    onclick="

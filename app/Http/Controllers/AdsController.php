@@ -17,7 +17,6 @@ class AdsController extends Controller
      */
     public function index()
     {
-//        $ads = Ad::all();
         $ads = DB::table('ads')->paginate(5);
 
         return view('ads.index', [
