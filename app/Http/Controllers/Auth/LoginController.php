@@ -86,7 +86,7 @@ class LoginController extends Controller
     }
 
     public function redirectTo() {
-        return Redirect::route('lor');
+        return Redirect::route(url(''));
     }
 
 }

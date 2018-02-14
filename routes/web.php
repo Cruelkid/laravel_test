@@ -18,15 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', 'AdsController@index')->name('ads');
-//Route::get('lor', 'AdsController@index')->name('ads_redirect');
 Route::get('create', 'AdsController@create')->name('create_ad');
 Route::get('{ad}', 'AdsController@show')->name('show_ad');
 Route::get('{ad}/edit', 'AdsController@edit')->name('edit_ad');
 Route::post('lor', 'Auth\LoginController@lor')->name('lor');
+Route::get(url(''), 'AdsController@index')->name('ads_redirect');
 
 Route::resource('ads', 'AdsController');
 Route::resource('users', 'UsersController');
-//Route::resource('lor', 'Auth\LoginController');
+Route::resource(url(''), 'AdsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
