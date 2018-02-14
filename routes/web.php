@@ -11,22 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
+Route::resource('ads', 'AdsController');
+Route::resource('users', 'UsersController');
 
 Route::get('/', 'AdsController@index')->name('ads');
 Route::get('create', 'AdsController@create')->name('create_ad');
 Route::get('{ad}', 'AdsController@show')->name('show_ad');
 Route::get('{ad}/edit', 'AdsController@edit')->name('edit_ad');
-Route::post('lor', 'Auth\LoginController@lor')->name('lor');
-Route::get(url(''), 'AdsController@index')->name('ads_redirect');
+Route::post('loginOrRegister', 'Auth\LoginController@loginOrRegister')->name('loginOrRegister');
 
-Route::resource('ads', 'AdsController');
-Route::resource('users', 'UsersController');
-Route::resource(url(''), 'AdsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

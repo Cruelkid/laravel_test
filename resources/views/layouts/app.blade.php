@@ -37,7 +37,7 @@
                     @guest
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('lor') }}" class="d-flex">
+                        <form method="POST" action="{{ route('loginOrRegister') }}" class="d-flex">
                             @csrf
                             <div class="form-group">
                                 <div class="form-group row">
@@ -72,8 +72,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <div class="form-group">
                                 <div class="mx-auto">

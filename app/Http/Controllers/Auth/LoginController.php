@@ -6,7 +6,6 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
-//use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -35,7 +34,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-//    protected $redirectTo;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -44,7 +43,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-//        $this->redirectTo = url('/');
         $this->middleware('guest')->except('logout');
     }
 
@@ -76,17 +74,20 @@ class LoginController extends Controller
         ]);
     }
 
-    public function lor(Request $request) {
+    public function loginOrRegister(Request $request) {
         $user = User::where('username', $request->input('username'))->first();
         if (!is_null($user)) {
             $this->login($request);
         } else {
             $this->register($request);
         }
+
+        return $this->redirectTo();
     }
 
     public function redirectTo() {
-        return Redirect::route(url(''));
+        return Redirect::action('AdsController@index');
     }
+
 
 }
