@@ -12,6 +12,15 @@
                 <li class="list-group-item">by {{ $ad->created_at }}</li>
             </ul>
         </div>
-        <a href="../ads">Go back</a>
+        <div class="mx-auto text-center">
+            @if (Route::has('login'))
+                @auth
+                    @if (Auth::user()->id == $ad->user_id)
+                        <a href="{{ $ad->id }}/edit" class="btn btn-primary">Edit</a>
+                    @endif
+                @endauth
+            @endif
+            <a href="{{ url('/') }}" class="btn btn-secondary">Go back</a>
+        </div>
     </div>
 @endsection
